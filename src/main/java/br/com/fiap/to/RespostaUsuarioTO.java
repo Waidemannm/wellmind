@@ -10,16 +10,16 @@ public class RespostaUsuarioTO {
     private Long idUsuario;
     @NotNull
     private Long idHabito;
-    @Min(0)
-    @Max(24)
-    private Integer resposta;
+
+
+    private int resposta;
     private String observacoes;
 
     public RespostaUsuarioTO() {
 
     }
 
-    public RespostaUsuarioTO(Long idResposta, Long idUsuario, Long idHabito, Integer resposta, String observacoes) {
+    public RespostaUsuarioTO(Long idResposta, Long idUsuario, Long idHabito, int resposta, String observacoes) {
         this.idResposta = idResposta;
         this.idUsuario = idUsuario;
         this.idHabito = idHabito;
@@ -51,11 +51,11 @@ public class RespostaUsuarioTO {
         this.idHabito = idHabito;
     }
 
-    public Integer getResposta() {
+    public int getResposta() {
         return resposta;
     }
 
-    public void setResposta(Integer resposta) {
+    public void setResposta(int resposta) {
         this.resposta = resposta;
     }
 
