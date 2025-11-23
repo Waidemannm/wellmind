@@ -52,17 +52,18 @@ public class UsuarioDAO {
     }
 
     public UsuarioTO save(UsuarioTO usuario) {
-        String sql = "insert into t_wmd_usuario (nm_email, nm_usuario, nr_idade, nm_genero) values (?, ?, ?, ?)";
-        try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
+        String sql = "insert into t_wmd_usuario (nm_email, nm_usuario, nr_idade, nm_genero) values (?, ?, ?, ?)  ";
+        try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql, new String[]{"ID_USUARIO"})) {
             ps.setString(1, usuario.getEmail());
             ps.setString(2, usuario.getNome());
             ps.setInt(3, usuario.getIdade());
             ps.setString(4, usuario.getGenero());
-            if (ps.executeUpdate() > 0) {
-                return usuario;
-            } else {
-                return null;
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    usuario.setIdUsuario(rs.getLong(1)); 
+                }
             }
+            return usuario;
 
         } catch (SQLException e) {
             System.out.println("Erro ao salvar usuário: " + e.getMessage());
