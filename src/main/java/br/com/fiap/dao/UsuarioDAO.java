@@ -24,7 +24,9 @@ public class UsuarioDAO {
             }
         } catch (SQLException e) {
             System.out.println("Erro ao buscar usuários: " + e.getMessage());
-        } 
+        } finally {
+            ConnectionFactory.closeConnection();
+        }
         return usuarios;
     }
 
